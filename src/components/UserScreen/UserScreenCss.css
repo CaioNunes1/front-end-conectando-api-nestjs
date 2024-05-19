@@ -1,0 +1,70 @@
+.containerUserScreen{
+    background: #FFFFFF;
+    max-width: 438px;
+    margin: 30px auto;
+    overflow: auto;
+    min-height: 534px;
+    padding: 30px;
+    border-radius: 18px;
+  }
+  
+body{
+      height: 100%;
+      background-color: #f2f2f2;
+      font-family: 'Poppins', sans-serif;
+      margin:0;
+      padding:0;
+    
+  }
+
+  .user-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px; /* Altura total da viewport para centralização vertical */
+    padding-top:20px;
+  }
+/* Estilos do contêiner do usuário */
+.containerUserScreen {
+  background: #FFFFFF;
+  max-width: 438px;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  overflow: auto;
+  min-height: 534px;
+  padding: 30px;
+  border-radius: 18px;
+}
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-radius: 100px;
+  }
+  
+  .profile-image {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+
+  .userProps{
+    width: 400px;
+    height: 50px;
+    margin: 5px;
+    padding: 3px 7px;
+    font-size: 15px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    border:0px;
+    line-height: 50px; /* Define a mesma altura que o contêiner */
+    line-
+  }

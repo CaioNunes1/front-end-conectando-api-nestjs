@@ -4,7 +4,7 @@ import AddData from './components/AddData'
 import SignUp from './components/SignUp';
 //import UserScreen from './components/UserScreen';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserScreen from './components/UserScreen';
+import UserScreen from './components/UserScreen/UserScreen';
 function App() {
 
   return (
