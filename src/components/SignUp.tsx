@@ -26,7 +26,7 @@ const SignUp = () => {
     
             const result=await signUpUsers({email,password,name});
     
-            if(result?.status===403){
+            if(result?.status==403){
                 alert('Cadastro realizado com sucesso!');
                 setisSignedUp(true);
             } else {

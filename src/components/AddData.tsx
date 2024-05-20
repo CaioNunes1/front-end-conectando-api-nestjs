@@ -2,11 +2,13 @@ import { useState } from "react"
 import TextLogin from "./TextLogin";
 import { Link } from "react-router-dom";
 import { signInUsers } from "../service/user";
+import { useNavigate } from 'react-router-dom';
 
 const AddData = () => {
 
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('');
+    const navigate=useNavigate();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Previne o comportamento padrão do formulário
@@ -23,11 +25,15 @@ const AddData = () => {
 
           const result=await signInUsers({email,password});
     
-            if(result?.status===200){
-                alert('Logadocom sucesso!');
+            if(result?.status==403){
+                alert('Logado com sucesso!');
+                navigate('/UserScreen')
             } else {
               alert('Erro ao realizar login.');
+              navigate('/UserScreen')
             }
+
+            
 
         }
         catch(error){

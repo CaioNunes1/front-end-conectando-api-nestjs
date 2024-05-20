@@ -1,7 +1,24 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import './UserScreenCss.css'
+import { getUser } from "../../service/user"
 const UserScreen:React.FC = () => {
     const [profileImg,setProfileImg]=useState<string| ArrayBuffer | null>(null)
+    const [user,setUser]=useState<{email:string;name:string} | null>(null)
+
+
+    useEffect(()=>{
+        const fetchUserData=async()=>{
+            try{
+                const userData=await getUser();
+                setUser(userData);
+            }
+            catch(error){
+                console.log('Error fetching data')
+            }
+        };
+
+        fetchUserData();
+    },[])
 
     const handleImgChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
         if(event.target.files && event.target.files[0]){
@@ -33,12 +50,12 @@ const UserScreen:React.FC = () => {
         <div style={{marginTop:'50px'}}>
             <div className="form-control">
                 <label htmlFor="">Name</label>
-                <div className="userProps">Nome </div>
+                <div className="userProps">{user?.name} </div>
             </div>
 
             <div className="form-control" style={{marginTop:'50px'}}>
             <label htmlFor="">Email</label>
-            <div className="userProps">Email </div>
+            <div className="userProps">{user?.email}</div>
         </div>
 
         </div>
