@@ -26,12 +26,12 @@ const SignUp = () => {
     
             const result=await signUpUsers({email,password,name});
     
-            if(result?.status==403){
+            if(result){
                 alert('Cadastro realizado com sucesso!');
                 setisSignedUp(true);
             } else {
               alert('Erro ao realizar cadastro.');
-              setisSignedUp(true);
+              
             }
             
         }

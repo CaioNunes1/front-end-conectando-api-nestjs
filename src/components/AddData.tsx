@@ -26,16 +26,13 @@ const AddData = () => {
           const result=await signInUsers({email,password});
           localStorage.setItem('email',email)
     
-            if(result?.status==201){
+            if(result){
                 alert('Logado com sucesso!');
                 navigate('/UserScreen')
-            } else if(result?.status==200) {
-              alert('Logado com sucesso!');
-              navigate('/UserScreen')
             }
             else{
               alert('Erro ao realizar login.');
-              navigate('/UserScreen')
+              //navigate('/UserScreen')
             }
 
             

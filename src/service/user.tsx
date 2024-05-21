@@ -16,7 +16,7 @@ password:string
 export async function signUpUsers({email,name,password}: SignUpData) {
     try {
         const response = await api.post('auth/signup',{email,name,password})
-        return response;
+        return response.data;
     } catch (err) {
         return err;
     }
@@ -25,6 +25,7 @@ export async function signUpUsers({email,name,password}: SignUpData) {
 export async function signInUsers({email,password}: SignInData) {
     try {
         const response = await api.post('auth/signin',{email,password})
+        localStorage.setItem('token',response.data.access_token);
         return response.data;
     } catch (err) {
         return err;
