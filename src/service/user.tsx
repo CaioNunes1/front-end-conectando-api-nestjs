@@ -16,9 +16,7 @@ password:string
 export async function signUpUsers({email,name,password}: SignUpData) {
     try {
         const response = await api.post('auth/signup',{email,name,password})
-        const token=response.data;
-        localStorage.setItem('token',token)
-        return token
+        return response;
     } catch (err) {
         return err;
     }
@@ -26,22 +24,20 @@ export async function signUpUsers({email,name,password}: SignUpData) {
 
 export async function signInUsers({email,password}: SignInData) {
     try {
-        const response = await api.post('auth/signup',{email,password})
+        const response = await api.post('auth/signin',{email,password})
         return response.data;
     } catch (err) {
         return err;
     }
 }
 
-export async function getUser(token:string){
+export async function getUser(email:string){
     try{
-        
-        if(!token) throw new Error('No found token')
 
-        const response=await api.get('users/me',{
-            headers:{
-                Authorization:`Bearer${token}`
-            }
+        const response=await api.get('users/search',{
+            params:{
+                email,
+            },
         });
         return response.data;
     }
