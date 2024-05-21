@@ -11,6 +11,9 @@ const SignUp = () => {
     const [isSignedUp,setisSignedUp]=useState(false);
     const navigate = useNavigate(); // Obtém a função de navegação
 
+
+    
+
     const handleSignUp= async(event:React.FormEvent<HTMLFormElement>)=>{
         event.preventDefault();//evitar o reload da página
 

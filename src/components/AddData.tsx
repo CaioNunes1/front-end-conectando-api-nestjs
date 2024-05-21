@@ -10,6 +10,8 @@ const AddData = () => {
     const [password,setPassword]=useState('');
     const navigate=useNavigate();
 
+    //const token=localStorage.getItem('token')
+
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Previne o comportamento padrão do formulário
 
@@ -24,15 +26,19 @@ const AddData = () => {
           }
 
           const result=await signInUsers({email,password});
+
           localStorage.setItem('email',email)
-    
-            if(result){
+          
+            if(result?.access_token){
                 alert('Logado com sucesso!');
                 navigate('/UserScreen')
             }
+            else if(result?.access_token ===403){
+              alert('Credenciais incorretas.');
+              //navigate('/UserScreen')
+            }
             else{
               alert('Erro ao realizar login.');
-              //navigate('/UserScreen')
             }
 
             
