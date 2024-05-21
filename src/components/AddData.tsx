@@ -52,27 +52,29 @@ const AddData = () => {
       }
     
   return (
-    <div>
-      <TextLogin titleLabel="Faça seu Login"/>
-        <form onSubmit={handleLogin}>
-        <div className='form' >
-          <div className='form-control'>
-            <label htmlFor="">Email</label>
-            <input type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}  />
-          </div>
+    <div className="body">
+        <div className="container">
+            <TextLogin titleLabel="Faça seu Login"/>
+              <form onSubmit={handleLogin}>
+              <div className='form' >
+                <div className='form-control'>
+                  <label htmlFor="">Email</label>
+                  <input type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}  />
+                </div>
 
-          <div className='form-control'>
-            <label htmlFor="">Password</label>
-            <input type="password" placeholder="***********" value={password} onChange={(e)=>setPassword(e.target.value)}  />
-          </div>
+                <div className='form-control'>
+                  <label htmlFor="">Password</label>
+                  <input type="password" placeholder="***********" value={password} onChange={(e)=>setPassword(e.target.value)}  />
+                </div>
 
-          <input type="submit" value='Sign in' className='btn btn-block'/>
-        </div>
+                <input type="submit" value='Sign in' className='btn btn-block'/>
+              </div>
 
-        <div >
-          <Link className='link-sign-up' to="/SignUp">Não tem conta? Cadastre-se Aqui</Link>
-        </div>
-        </form>
+              <div >
+                <Link className='link-sign-up' to="/SignUp">Não tem conta? Cadastre-se Aqui</Link>
+              </div>
+              </form>
+            </div>
     </div>
   )
 }

@@ -45,28 +45,39 @@ const UserScreen:React.FC = () => {
         document.getElementById('fileInput')?.click()
     }
 
+    const hangleLogout=()=>{
+        return null;
+    }
+
   return (
-    <div className="">
-        <div className="user-screen" style={{padding:'0px', paddingTop:'15px'}}>
-            
-                <div className="profile-container">
-                    <img src={profileImg || 'default-profile.png'} alt="" className="profile-image" 
-                    onClick={handleImgClick} />
-                    <input type="file" id="fileInput" accept="image/*" onChange={handleImgChange}/>                
+    <div className="body">
+        <div className="topBar" >
+        <form action="" onClick={hangleLogout}>
+        <input type="submit" value='Logout' className='btnUserScreen btn-blockUserScreen'/>
+        </form>   
+            <div className="containerUserScreen">
+                <div className="user-screen" style={{padding:'0px', paddingTop:'15px'}}>
+                    
+                        <div className="profile-container">
+                            <img src={profileImg || 'default-profile.png'} alt="" className="profile-image" 
+                            onClick={handleImgClick} />
+                            <input type="file" id="fileInput" accept="image/*" onChange={handleImgChange}/>                
+                        </div>
                 </div>
-        </div>
 
-        <div style={{marginTop:'50px'}}>
-            <div className="form-control">
-                <label htmlFor="">Name</label>
-                <div className="userProps">{user?.firstname} </div>
+                <div style={{marginTop:'50px'}}>
+                    <div className="form-control">
+                        <label htmlFor="">Name</label>
+                        <div className="userProps">{user?.firstname} </div>
+                    </div>
+
+                    <div className="form-control" style={{marginTop:'50px'}}>
+                    <label htmlFor="">Email</label>
+                    <div className="userProps">{user?.email}</div>
+                </div>
+
+                </div>
             </div>
-
-            <div className="form-control" style={{marginTop:'50px'}}>
-            <label htmlFor="">Email</label>
-            <div className="userProps">{user?.email}</div>
-        </div>
-
         </div>
     </div>
   )

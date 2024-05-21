@@ -1,5 +1,6 @@
 import './App.css'
 import './index.css'
+import './components/UserScreen/UserScreenCss.css'
 import AddData from './components/AddData'
 import SignUp from './components/SignUp';
 //import UserScreen from './components/UserScreen';
@@ -10,17 +11,12 @@ function App() {
   return (
     <>
     <Router>
-      <div className='body'>
-        <div className='container'>
           <Routes>
             <Route path='/' element={<AddData/>}/>
             <Route path='SignUp' element={<SignUp/>}/>
             <Route path='UserScreen' element={<UserScreen/>}/>
           
         </Routes>
-        </div>
-        
-      </div>
     </Router>
     </>
   )

@@ -1,11 +1,13 @@
 .containerUserScreen{
-    background: #FFFFFF;
-    max-width: 438px;
-    margin: 30px auto;
-    overflow: auto;
-    min-height: 534px;
-    padding: 30px;
-    border-radius: 18px;
+  background: #FFFFFF;
+  max-width: 438px;
+  margin: 0px auto;
+  position: relative;/*usa os dois o position e o top para dar uma distancia do topo*/
+  top: 100px; /* Adiciona distância do topo */
+  overflow: auto;
+  min-height: 534px;
+  padding: 30px;
+  border-radius: 18px;
   }
   
 body{
@@ -67,4 +69,36 @@ body{
     border:0px;
     line-height: 50px; /* Define a mesma altura que o contêiner */
     
+  }
+
+  .topBar{
+    margin: 0px auto;/*aparentemente deixa o elementos no centro margin 0 auto */
+    height: 60px;
+    background-color: #FFFFFF;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .btnUserScreen {
+    display: inline-block;
+    background: #02274F;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+    position:absolute; /* Define a posição absoluta para o botão */
+    top: 0; /* Posiciona o botão no topo do contêiner pai */
+    right: 0; /* Posiciona o botão à esquerda do contêiner pai */
+    margin-top: 9px;
+    margin-right:20px ;
+  }
+  
+  .btn-blockUserScreen {
+    display: block;
+    width: 415px;
   }
