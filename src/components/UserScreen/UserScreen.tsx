@@ -4,6 +4,7 @@ import { getUser } from "../../service/user"
 import { useNavigate } from "react-router-dom"
 const UserScreen:React.FC = () => {
     const [profileImg,setProfileImg]=useState<string| ArrayBuffer | null>(null)
+    const [imgSrc, setImgSrc] = useState<string | undefined>(undefined);
     const [user,setUser]=useState<{email:string;firstname:string} | null>(null)
     const email=localStorage.getItem('email');
     const navigate = useNavigate(); // Obtém a função de navegação
@@ -43,6 +44,26 @@ const UserScreen:React.FC = () => {
         }
     }
 
+    useEffect(()=>{
+        if(profileImg && typeof profileImg!== 'string'){
+            const dataURL=convertArrayBufferToDataURL(profileImg);
+            setImgSrc(dataURL);
+        }
+        else{
+            setImgSrc(profileImg as string);
+        }
+    },[profileImg]);
+
+    const convertArrayBufferToDataURL = (buffer: ArrayBuffer): string => {
+        let binary = '';
+        const bytes = new Uint8Array(buffer);
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        return 'data:image/jpeg;base64,' + window.btoa(binary);
+      };
+
     const handleImgClick=()=>{
         document.getElementById('fileInput')?.click()
     }
@@ -61,9 +82,10 @@ const UserScreen:React.FC = () => {
                 <div className="user-screen" style={{padding:'0px', paddingTop:'15px'}}>
                     
                         <div className="profile-container">
-                            <img src={profileImg || 'default-profile.png'} alt="" className="profile-image" 
+                        <input type="file" id="fileInput" accept="image/*" onChange={handleImgChange}/>                
+                            <img src={imgSrc || 'default-profile.png'} alt="" className="profile-image" 
                             onClick={handleImgClick} />
-                            <input type="file" id="fileInput" accept="image/*" onChange={handleImgChange}/>                
+                            
                         </div>
                 </div>
 
