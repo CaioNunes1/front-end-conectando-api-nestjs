@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
 import './UserScreenCss.css'
 import { getUser } from "../../service/user"
+import { useNavigate } from "react-router-dom"
 const UserScreen:React.FC = () => {
     const [profileImg,setProfileImg]=useState<string| ArrayBuffer | null>(null)
     const [user,setUser]=useState<{email:string;firstname:string} | null>(null)
     const email=localStorage.getItem('email');
+    const navigate = useNavigate(); // Obtém a função de navegação
 
     useEffect(()=>{
         const fetchUserData=async ()=>{
@@ -46,7 +48,7 @@ const UserScreen:React.FC = () => {
     }
 
     const hangleLogout=()=>{
-        return null;
+        navigate('/')
     }
 
   return (
