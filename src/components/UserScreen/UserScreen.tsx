@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react"
 import './UserScreenCss.css'
 import { getUser } from "../../service/user"
 import { useNavigate } from "react-router-dom"
-import { Snackbar, Button, Alert } from '@mui/material';
 const UserScreen:React.FC = () => {
     const [profileImg,setProfileImg]=useState<string| ArrayBuffer | null>(null)
     const [imgSrc, setImgSrc] = useState<string | undefined>(undefined);
     const [user,setUser]=useState<{email:string;firstname:string} | null>(null)
     const email=localStorage.getItem('email');
     const navigate = useNavigate(); // Obtém a função de navegação
-    const [open, setOpen] = useState(false);
+    
 
     useEffect(()=>{
         const fetchUserData=async ()=>{
@@ -32,14 +31,6 @@ const UserScreen:React.FC = () => {
         fetchUserData();
 
     },[]);
-
-    const handleClose=(event,reason)=>{
-        if(reason=='clickaway'){
-            return
-        }
-        setOpen(event);
-
-    }
 
 
     const handleImgChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -82,9 +73,11 @@ const UserScreen:React.FC = () => {
         navigate('/')
     }
 
+
   return (
     <div className="body">
         <div className="topBar" >
+        
         <form action="" onClick={hangleLogout}>
         <input type="submit" value='Logout' className='btnUserScreen btn-blockUserScreen'/>
         </form>   
@@ -112,11 +105,6 @@ const UserScreen:React.FC = () => {
 
                 </div>
             </div>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Você fez login com sucesso!
-                </Alert>
-            </Snackbar>
         </div>
     </div>
   )

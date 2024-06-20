@@ -1,7 +1,8 @@
 import TextLogin from "./TextLogin";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { signUpUsers } from "../service/user";
 import { useNavigate } from 'react-router-dom';
+import { Snackbar, Alert } from '@mui/material';
 const SignUp = () => {
 
     const [email,SetEmail]=useState('')
@@ -10,7 +11,7 @@ const SignUp = () => {
     const [name,SetName]=useState('');
     const [isSignedUp,setisSignedUp]=useState(false);
     const navigate = useNavigate(); // Obtém a função de navegação
-
+    const [open, setOpen] = useState(false);
 
     
 
@@ -30,8 +31,9 @@ const SignUp = () => {
             const result=await signUpUsers({email,password,name});
     
             if(result){
-                alert('Cadastro realizado com sucesso!');
+                //alert('Cadastro realizado com sucesso!');
                 setisSignedUp(true);
+                handleLogin()
             } else {
               alert('Erro ao realizar cadastro.');
               
@@ -44,12 +46,34 @@ const SignUp = () => {
         if(isSignedUp){
             return navigate('/')        
         }
+
         
+    }
+
+    const handleClose=(event: SyntheticEvent | Event, reason?: string)=>{
+        if(reason=='clickaway'){
+            return
+        }
+        setOpen(false);
+  
+    }
+
+    const handleLoginSucess=()=>{
+        setOpen(true);
+    }
+
+    const handleLogin=()=>{
+        handleLoginSucess();
     }
   return (
         <div className="body">
             <div className="container">
                 <form onSubmit={handleSignUp}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Você cadastrou com sucesso!
+                    </Alert>
+                </Snackbar>
                 <div className="form">
                     <TextLogin titleLabel="Faça seu cadastro"/>
                     <div className="form-control">
