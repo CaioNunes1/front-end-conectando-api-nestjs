@@ -11,8 +11,10 @@ const AddData = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('');
     const navigate=useNavigate();
-    const [open, setOpen] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
     const [isTrue,setIsTrue]=useState(false)
+    const [errorMessage, setErrorMessage] = useState('');
 
     //const token=localStorage.getItem('token')
 
@@ -39,11 +41,13 @@ const AddData = () => {
                 setIsTrue(true);
             }
             else if(result?.access_token ===403){
-              alert('Credenciais incorretas.');
+              //alert('Credenciais incorretas.');
+              handleAlertLoginFail('Credenciais incorretas.')
               //navigate('/UserScreen')
             }
             else{
-              alert('Erro ao realizar login.');
+              //alert('Erro ao realizar login.');
+              handleAlertLoginFail('Erro ao realizar login.');
             }
 
             
@@ -60,33 +64,30 @@ const AddData = () => {
         
       }
 
-      
-    const handleClose=(event: SyntheticEvent | Event, reason?: string)=>{
-      if(reason=='clickaway'){
-          return
-      }
-      setOpen(false);
+  // ALERT QUANDO DA CERTO O LOGIN    
+  const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSuccess(false);
+    setOpenError(false);
+  };
 
-  }
+  const handleAlertLogin = () => {
+    setOpenSuccess(true);
+  };
 
-  const handleLoginSucess=()=>{
-      setOpen(true);
-  }
-
-  const handleAlertLogin=()=>{
-      handleLoginSucess();
-  }
+  const handleAlertLoginFail = (message: string) => {
+    setErrorMessage(message);
+    setOpenError(true);
+  };
     
   return (
     <div className="body">
         <div className="container">
             <TextLogin titleLabel="Faça seu Login"/>
               <form onSubmit={handleLogin}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Você cadastrou com sucesso!
-                    </Alert>
-                </Snackbar>
+                
               <div className='form' >
                 <div className='form-control'>
                   <label htmlFor="">Email</label>
@@ -105,6 +106,16 @@ const AddData = () => {
                 <Link className='link-sign-up' to="/SignUp">Não tem conta? Cadastre-se Aqui</Link>
               </div>
               </form>
+              <Snackbar open={openSuccess} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Você fez login com sucesso!
+                </Alert>
+              </Snackbar>
+              <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                  {errorMessage}
+                </Alert>
+              </Snackbar>
             </div>
     </div>
   )
