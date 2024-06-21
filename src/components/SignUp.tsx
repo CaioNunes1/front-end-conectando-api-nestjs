@@ -9,9 +9,12 @@ const SignUp = () => {
     const [password,setPassword]=useState('');
     const [password2,setPassword2]=useState('');
     const [name,SetName]=useState('');
-    const [isSignedUp,setisSignedUp]=useState(false);
     const navigate = useNavigate(); // Obtém a função de navegação
-    const [open, setOpen] = useState(false);
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+    const [isTrue,setIsTrue]=useState(false)
+    const [errorMessage, setErrorMessage] = useState('');
 
     
 
@@ -20,11 +23,12 @@ const SignUp = () => {
 
         try{
             if(!email || !password || !name){
-                alert("Preencha todos os espaços")
+                handleAlertLoginFail('Algum dos campos não estão preechidos')
+                setIsTrue(true)
                 return
             }
             if(password!=password2){
-                alert("Senha não está correta")
+                handleAlertLoginFail("Senha não está correta")
                 return
             }
     
@@ -32,10 +36,11 @@ const SignUp = () => {
     
             if(result){
                 //alert('Cadastro realizado com sucesso!');
-                setisSignedUp(true);
-                handleLogin()
+                handleAlertLogin()
+                setIsTrue(true);
+                
             } else {
-              alert('Erro ao realizar cadastro.');
+                handleAlertLoginFail('Erro ao realizar cadastro.');
               
             }
             
@@ -43,37 +48,44 @@ const SignUp = () => {
         catch(error){
             console.log(error);
         }
-        if(isSignedUp){
+        if(isTrue){
             return navigate('/')        
         }
 
         
     }
 
-    const handleClose=(event: SyntheticEvent | Event, reason?: string)=>{
-        if(reason=='clickaway'){
-            return
-        }
-        setOpen(false);
-  
+  // ALERT QUANDO DA CERTO O LOGIN    
+  const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
     }
+    setOpenSuccess(false);
+    setOpenError(false);
+  };
 
-    const handleLoginSucess=()=>{
-        setOpen(true);
-    }
+  const handleAlertLogin = () => {
+    setOpenSuccess(true);
+  };
 
-    const handleLogin=()=>{
-        handleLoginSucess();
-    }
+  const handleAlertLoginFail = (message: string) => {
+    setErrorMessage(message);
+    setOpenError(true);
+  };
   return (
         <div className="body">
             <div className="container">
                 <form onSubmit={handleSignUp}>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Você cadastrou com sucesso!
-                    </Alert>
+                <Snackbar open={openSuccess} autoHideDuration={6000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Você fez login com sucesso!
+                  </Alert>
                 </Snackbar>
+              <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                  {errorMessage}
+                </Alert>
+              </Snackbar>
                 <div className="form">
                     <TextLogin titleLabel="Faça seu cadastro"/>
                     <div className="form-control">

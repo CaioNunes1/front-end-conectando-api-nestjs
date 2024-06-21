@@ -23,11 +23,11 @@ const AddData = () => {
 
         try{
           if(!email){// se quando for escrever, sair e não escrever nada, aparece esse alerta
-            alert("Por favor adicione um email")
+            handleAlertLoginFail("Por favor adicione um email")
             return
           }
           if(!password){// se quando for escrever, sair e não escrever nada, aparece esse alerta
-            alert("Por favor adicione uma senha")
+            handleAlertLoginFail("Por favor adicione uma senha")
             return
           }
 
